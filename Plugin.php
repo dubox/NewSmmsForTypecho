@@ -169,7 +169,7 @@ class NewSmmsForTypecho_Plugin extends Widget_Upload implements Typecho_Plugin_I
      * @param array $content 文件相关信息
      * @return string
      */
-    public static function deleteHandle(array $content)
+    public static function deleteHandle(array $content):bool
     {
         switch ($content['attachment']->source){
             case "smms":  // smms图床存储
@@ -194,7 +194,7 @@ class NewSmmsForTypecho_Plugin extends Widget_Upload implements Typecho_Plugin_I
      * @param array $content 单个文件的相关信息列表
      * @return string
      */
-    public static function attachmentHandle(array $content)
+    public static function attachmentHandle(array $content): string
     {
         // 根据attachment的存储位置(本地还是图床等)来获取绝对路径
         switch ($content['attachment']->source){
@@ -213,7 +213,7 @@ class NewSmmsForTypecho_Plugin extends Widget_Upload implements Typecho_Plugin_I
      * @param array $content
      * @return string
      */
-    public static function attachmentDataHandle(array $content)
+    public static function attachmentDataHandle(array $content): string
     {
         switch ($content['attachment']->source){
             case "smms":  // smms图床存储
@@ -815,9 +815,9 @@ class NewSmmsForTypecho_Plugin extends Widget_Upload implements Typecho_Plugin_I
      *
      * @access public
      * @param array $content 文件相关信息
-     * @return string
+     * @return bool
      */
-    public static function pDeleteHandle(array $content)
+    public static function pDeleteHandle(array $content):bool
     {
         return !Typecho_Common::isAppEngine()
             && @unlink(__TYPECHO_ROOT_DIR__ . '/' . $content['attachment']->path);
